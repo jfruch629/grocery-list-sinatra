@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Groceries</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  </head>
+
+  <body>
+    <h1> Groceries </h1>
+    <div class="error_read">
+      <% if session[:valid] == false %>
+      Please fill the "Name" field to add an item to the list
+      <% end %>
+    </div>
+
+    <div class="grocery_list">
+      <% if !@grocery_list.nil? %>
+      <ul>
+        <% @grocery_list.each do |grocery| %>
+          <li> <%= grocery[1] + " " + grocery[0]  %> </li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+
+    <form action="/grocery-list" method="post">
+      <div class="form_grocery">
+        <label for="grocery">Name</label>
+        <input type="text" id="grocery" name="grocery">
+      </div><br>
+
+      <% if session[:quantity_given] == true %>
+        <div class="form_grocery">
+          <label for="quantity">Quantity</label>
+          <input type="text" id="quantity" name="quantity" value="Hi">
+        </div><br>
+      <% else %>
+        <div class="form_grocery">
+          <label for="quantity">Quantity</label>
+          <input type="text" id="quantity" name="quantity">
+        </div><br>
+      <% end %>
+
+      <div class ="form_grocery">
+        <input type="submit" value="Add" id="submit">
+      </div>
+    </form>
+  </body>
+</html>
